@@ -41,7 +41,7 @@ namespace VennLang
             }
             else
             {
-                return new SetNode(new List<string> { });
+                return new SetNode(new List<object> { });
             }
         }
 

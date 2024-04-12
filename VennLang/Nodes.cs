@@ -96,7 +96,6 @@ namespace VennLang
         }
     }
     //Set theory nodes
-
     public class ElementNode(string element) : Node
     {
         private string _value = element;
@@ -107,12 +106,12 @@ namespace VennLang
         }
     }
 
-    public class SetNode(List<string> set) : Node
+    public class SetNode(List<object> set) : Node
     {
-        private List<string> _set = set;
-        public List<string> Values => _set;
+        private List<object> _set = set;
+        public List<object> Values => _set;
 
-        public Node AddElement(string node)
+        public Node AddElement(object node)
         {
             _set.Add(node);
             return this;
@@ -125,7 +124,7 @@ namespace VennLang
                 string text = "{";
                 foreach (var s in _set)
                 {
-                    text += (s + ",");
+                    text += (s.ToString() + ",");
                 }
                 text = text.Remove(text.Length - 1, 1);
                 text += "}";
@@ -188,25 +187,4 @@ namespace VennLang
             return _node1.ToString() + " + " + _node2.ToString();
         }
     }
-
-    /*
-     * Old SetNode code.
-     * public class SetNode : Node
-    {
-        private List<string> _set = new List<string>();
-        public List<string> Values => _set;
-
-        public SetNode(List<string> set) { _set = set; }
-        public override string ToString()
-        {
-            string text = "{";
-            foreach (string s in _set)
-            {
-                text += (s + ",");
-            }
-            text = text.Remove(text.Length - 1, 1);
-            text += "}";
-            return text;
-        }
-    }*/
 }

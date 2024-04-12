@@ -67,7 +67,7 @@ namespace VennLang
                 throw new Exception("Invalid Syntax: Expected { at the start of the set, but received: " + _tokens[_position].Value + " of type: " + _tokens[_position].TokenType);
 
             _position++;
-            SetNode result = new SetNode(new List<string> { });
+            SetNode result = new SetNode(new List<object> { });
             if (_tokens[_position].TokenType != TokenTypes.TokenType.Element)
             {
                 if (_tokens[_position].TokenType == TokenTypes.TokenType.OpenBrace)
@@ -77,7 +77,7 @@ namespace VennLang
             }
             else
             {
-                result = new SetNode(new List<string> { Element() });
+                result = new SetNode(new List<object> { Element() });
             }
 
             while (_position < _tokens.Count && (_tokens[_position].TokenType == TokenTypes.TokenType.Comma))
@@ -90,7 +90,7 @@ namespace VennLang
             {
                 _position++;
                 if (result.Values.Count == 0)
-                    return new SetNode(new List<string> { "" });
+                    return new SetNode(new List<object> { "" });
                 return result;
             }
             else

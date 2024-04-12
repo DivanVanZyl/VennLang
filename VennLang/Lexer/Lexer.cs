@@ -30,10 +30,10 @@ namespace VennLang
                     {
                         yield return GenerateNumber();
                     }
-                    else if (_text[_position].IsLetter())
+                    /*else if (_text[_position].IsLetter())
                     {
                         yield return GenerateElement();
-                    }
+                    }*/
                     //Operators
                     else if (_text[_position] == '\\')
                     {
@@ -89,7 +89,8 @@ namespace VennLang
                     }
                     else
                     {
-                        throw new Exception("Illegal character: " + _text[_position++]);
+                        yield return GenerateCatchallElement();
+                        //throw new Exception("Illegal character: " + _text[_position++]);
                     }
                 }
             }
@@ -112,6 +113,18 @@ namespace VennLang
             {
                 element += _text[_position++].ToString();
             }
+            return new Token(TokenType.Element, element);
+        }
+        
+        private Token GenerateCatchallElement()
+        {
+            string element = "";
+            while (_position < _text.Length && _text[_position] != '}' && _text[_position] != ',')
+            {
+                element += _text[_position++].ToString();
+            }
+            if (element.Length == 0)
+                throw new Exception("Syntax error: Elements must be terminated by a comma delimiter ',' or closing brace '}'");
             return new Token(TokenType.Element, element);
         }
 

@@ -23,6 +23,10 @@ namespace VennLang
                 {
                     _position++;
                 }
+                else if (_position > 0 && (_text[_position - 1] == '{' || _text[_position - 1] == ','))    //Is the start of an element
+                {
+                    yield return GenerateCatchallElement();
+                }
                 else
                 {
                     //Elements. Simliar to "Number" in "Simple Math Parser" terms, in the sense that it is the most atomic contruct of a set theory expression.
@@ -115,7 +119,7 @@ namespace VennLang
             }
             return new Token(TokenType.Element, element);
         }
-        
+
         private Token GenerateCatchallElement()
         {
             string element = "";

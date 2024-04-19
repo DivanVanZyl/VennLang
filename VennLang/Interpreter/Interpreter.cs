@@ -9,7 +9,7 @@ namespace VennLang
     public class Interpreter
     {
         /// <summary>
-        /// Pass a root node of a tree. The interpreter will then process the tree and return a number.
+        /// Pass a root node of a tree. The interpreter will then process the tree and return a set.
         /// </summary>
         public string Visit(Node node)
         {
